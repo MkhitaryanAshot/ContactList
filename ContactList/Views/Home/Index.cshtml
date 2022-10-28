@@ -1,0 +1,52 @@
+﻿@using ContactList.Domain.Entites
+@model List<ContactList.Models.ContactViewModel>;
+
+@{Layout = null;}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Contact List</title>
+    <link href="~/css/contactlist.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div style="position:absolute;top:30px;left:150px;">
+        <div id="justblue"></div>
+        <h1>Contact List</h1>
+    </div>
+    <table id="table">
+        <tr style="border-color:blue;font-size:15px;">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Adress</th>
+        </tr>
+        @foreach(ContactViewModel item in Model)
+        {
+          <tr>
+            <th>@item.FirstName</th>
+            <th>@item.LastName</th>
+            <th>@item.Email</th>
+            <th>@item.PhoneNumber</th>
+            <th>@item.Address</th>
+            <th>
+                <a asp-route-id="@item.Id" asp-action="SingleContact" class="btn btn-primary">View</a>
+            </th>
+            <th>
+                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary">Update</a>
+            </th>
+            <th>
+                <form method = "post">
+                  <input asp-route-id="@item.Id" asp-action="Delete" class="btn btn-danger" type="submit" value="Delete" style = "margin-top:50%" />
+
+                </form>
+            </th>
+        </tr>
+        }
+    </table> 
+    <a  asp-action="Create" class="btn btn-primary" style = "position:absolute;top:90%;left:80%">Create</a>
+
+</body>
+</html>
